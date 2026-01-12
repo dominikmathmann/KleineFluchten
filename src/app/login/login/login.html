@@ -1,0 +1,13 @@
+<form (ngSubmit)="performLogin()">
+<mat-form-field>
+  <label>Username:</label>
+  <input [field]="loginForm.username" matInput/>
+</mat-form-field>
+
+<mat-form-field>
+  <label>Passwort:</label>
+  <input type="password" [field]="loginForm.password" matInput/>
+</mat-form-field>
+
+<button mat-raised-button>login</button>
+</form>

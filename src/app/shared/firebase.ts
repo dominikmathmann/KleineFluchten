@@ -12,13 +12,12 @@ export class Firebase {
 
   http = inject(HttpClient);
 
-  // TODO add real
-  login(username: string, password: string) {
+  login(email: string, password: string) {
     return this.http.post<any>(
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.apiKey,
       {
-        "email": "dadom.mobile@gmail.com",
-        "password": "Fluchten1337!",
+        email,
+        password,
         "returnSecureToken": true
       }
     )
@@ -61,6 +60,28 @@ export class Firebase {
     )
   }
 
+
+  updateEscape(field: string, id: string, value: any, valueType: string,  token: string) {
+    const requestFieldValue : any = {};
+    requestFieldValue[valueType] = value;
+
+    const request:any = {
+      fields: {}
+    }
+    request.fields[field] = requestFieldValue;
+
+
+    return this.http.patch<void>(
+      `https://firestore.googleapis.com/v1/${id}?updateMask.fieldPaths=${field}`,
+      request,
+      {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      }
+    )
+  }
+
   mapEscape(escape: EscapeAdd) {
     return {
       "fields": {
@@ -81,6 +102,9 @@ export class Firebase {
         },
         "url": {
           "stringValue": escape.url
+        },
+        "voting": {
+          "numberValue": -1,
         },
         "offers": {
           "arrayValue": {
@@ -104,14 +128,15 @@ export class Firebase {
         'notes',
         'locationType',
         'coordinates',
-        'offers'
+        'offers',
+        'voting'
       ];
       // @ts-ignore
       keys.forEach(field => escape[field] = this.extract(escapeDocument.fields[field]) as any);
-      escape.offers = escape.offers?.values ? (escape.offers.values as unknown as any[]).map(key => this.extract(key)):[];
+      escape.offers = escape.offers?.values ? (escape.offers.values as unknown as any[]).map(key => this.extract(key)) : [];
       escape.distance = distanceInKm(environment.home, escape.coordinates);
       return escape;
-    });
+    }).sort((a, b) => a.distance - b.distance);
   }
 
   extract(s: any): any {

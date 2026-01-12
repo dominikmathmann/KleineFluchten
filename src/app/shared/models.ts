@@ -1,4 +1,4 @@
-export interface Escape{
+export interface Escape {
   id: string;
   title: string;
   url: string;
@@ -9,6 +9,7 @@ export interface Escape{
   offers: string[];
   visited: boolean;
   distance: number;
+  voting: -1 | 0 | 1 | 2 | 3 | 4 | 5;
 }
 
 export type EscapeKey = keyof Escape;
@@ -20,16 +21,16 @@ export interface EscapeAdd {
   notes: string;
   locationType: string;
   coordinates: string;
-  offers: {offerType: string, offered: boolean }[];
+  offers: { offerType: string, offered: boolean }[];
 }
 
-export enum LocationType{
+export enum LocationType {
   CAMP = 'CAMP',
   HOTEL = 'HOTEL',
   WILD = 'WILD'
 }
 
-export enum Offer{
+export enum Offer {
   FOOD = "FOOD",
   TOILET = "TOILET",
   SHOWER = "SHOWER",

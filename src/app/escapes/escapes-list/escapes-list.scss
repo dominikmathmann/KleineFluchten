@@ -22,7 +22,6 @@ span {
 
   align-items: baseline;
   gap: 2rem;
-  //height: 4rem;
 
   p.multi {
     display: flex;
@@ -38,13 +37,17 @@ span {
     justify-content: center;
 
     > img {
-      max-height: 25vh;
+      max-width: 75vw;
       padding: 0.25rem;
 
       border-width: 1px;
       border-style: solid;
       border-color: var(--mat-card-elevated-container-color, var(--mat-sys-surface-container-low));
       border-radius: var(--mat-card-elevated-container-shape, var(--mat-sys-corner-medium));
+
+      @media (min-width: 1024px) {
+        width: 500px;
+      }
     }
   }
 }

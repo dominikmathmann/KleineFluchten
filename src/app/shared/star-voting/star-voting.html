@@ -1,0 +1,12 @@
+<div class="start-container" (mouseover)="hoverCount.set(-1)" (click)="voted.emit(-1)">
+
+</div>
+@for (v of givenStars(); track idx; let idx = $index) {
+  <div class="start-container" (mouseover)="hoverCount.set(idx)" (click)="voted.emit(idx)">
+    @if (v || idx<=hoverCount()) {
+      <mat-icon>star</mat-icon>
+    } @else {
+      <mat-icon>star_bordered</mat-icon>
+    }
+  </div>
+}

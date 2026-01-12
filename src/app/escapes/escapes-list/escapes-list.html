@@ -1,4 +1,4 @@
-@for (escape of escapeStore.escapes(); track escape.id; let last = $last) {
+@for (escape of escapeResource.value(); track escape.id; let last = $last) {
   <mat-card>
     <mat-card-header>
       <h2>{{ escape.title }}</h2>
@@ -20,6 +20,7 @@
             }
     </p>
     </span>
+    <span><label>Bewertung:</label><p><ddkf-star-voting [voting]="escape.voting" (voted)="voteEscape(escape.id,$event)"></ddkf-star-voting></p></span>
     <mat-card-footer>
       <img src="divider_ss.png" width="250px">
     </mat-card-footer>

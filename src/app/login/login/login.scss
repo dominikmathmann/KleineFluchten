@@ -1,0 +1,15 @@
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  align-items: center;
+}
+
+label{
+  font-family: 'Pacifico', cursive;
+}
+
+mat-form-field{
+  width: 100%;
+}
