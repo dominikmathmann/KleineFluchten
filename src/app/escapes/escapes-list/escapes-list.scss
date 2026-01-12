@@ -1,0 +1,50 @@
+@use '../../../styles_variables' as var;
+
+mat-card {
+  background-color: var(--body-background-color);
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+
+  h2 {
+    width: 100%;
+    text-align: center;
+  }
+
+  mat-card-footer {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+span {
+  display: flex;
+
+  align-items: baseline;
+  gap: 2rem;
+  //height: 4rem;
+
+  p.multi {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  &.img {
+    margin-bottom: 2rem;
+
+    display: flex;
+    justify-content: center;
+
+    > img {
+      max-height: 25vh;
+      padding: 0.25rem;
+
+      border-width: 1px;
+      border-style: solid;
+      border-color: var(--mat-card-elevated-container-color, var(--mat-sys-surface-container-low));
+      border-radius: var(--mat-card-elevated-container-shape, var(--mat-sys-corner-medium));
+    }
+  }
+}

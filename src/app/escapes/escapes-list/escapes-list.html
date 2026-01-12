@@ -1,0 +1,27 @@
+@for (escape of escapeStore.escapes(); track escape.id; let last = $last) {
+  <mat-card>
+    <mat-card-header>
+      <h2>{{ escape.title }}</h2>
+    </mat-card-header>
+
+    @if (escape.image) {
+      <span class="img"><img [src]="escape.image"/></span>
+    }
+    <span><label>Ort:</label><p><a href="{{escape.coordinates | coordGoogleMaps}}"
+                                   target="new">{{ escape.coordinates }}</a></p></span>
+    <span><label>Distanz:</label><p><a href="{{escape.coordinates | coordGoogleRoute:homeLocationCoordinates}}"
+                                       target="new">{{ escape.distance }}km</a></p></span>
+    <span><label>URL:</label><p><a href="{{escape.url}}" target="new">{{ escape.url }}</a></p></span>
+    <span><label>Notizen:</label><p>{{ escape.notes }}</p></span>
+    <span><label>Typ:</label><p><ddkf-type-icon [iconType]="escape.locationType"></ddkf-type-icon></p></span>
+    <span><label>Angebote:</label><p class="multi">
+            @for (offer of escape.offers; track offer) {
+              <p><ddkf-type-icon [iconType]="offer"></ddkf-type-icon></p>
+            }
+    </p>
+    </span>
+    <mat-card-footer>
+      <img src="divider_ss.png" width="250px">
+    </mat-card-footer>
+  </mat-card>
+}

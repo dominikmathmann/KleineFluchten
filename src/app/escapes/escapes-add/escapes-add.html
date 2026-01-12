@@ -1,0 +1,41 @@
+<form (ngSubmit)="submit()">
+  <mat-form-field>
+    <label>Titel:</label>
+    <input [field]="escapeForm.title" matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>Koordinaten:</label>
+    <input [field]="escapeForm.coordinates" matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>URL:</label>
+    <input [field]="escapeForm.url" matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>Bild:</label>
+    <input [field]="escapeForm.image" matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>Notizen:</label>
+    <input [field]="escapeForm.notes" matInput/>
+  </mat-form-field>
+  <div>
+    <label>Typ:</label><br/>
+    <mat-radio-group [field]="escapeForm.locationType">
+      @for (t of typeOptions; track t) {
+        <mat-radio-button [value]="t">
+          <ddkf-type-icon [iconType]="t"/>
+        </mat-radio-button>
+      }
+    </mat-radio-group>
+  </div>
+  <div>
+    <label>Angebote:</label><br/>
+    @for(o of escapeForm.offers;track  o){
+      <mat-checkbox [field]="o.offered"><ddkf-type-icon [iconType]="o.offerType().value()"/></mat-checkbox>
+    }
+  </div>
+  <footer>
+    <button mat-raised-button type="submit">speichern</button>
+  </footer>
+</form>

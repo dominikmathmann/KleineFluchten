@@ -1,0 +1,26 @@
+@use '../styles_variables' as var;
+:host{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ol{
+    list-style: none;
+    font-size: 2rem;
+    font-family: 'Pacifico', cursive;
+    color: var(--mat-sys-secondary);
+
+    display: flex;
+    gap: 2rem;
+
+    li{
+      cursor: pointer;
+      &:hover{
+        text-decoration: underline;
+      }
+      &.active{
+        font-weight: bold;
+      }
+    }
+  }
+}
