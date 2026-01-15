@@ -104,7 +104,7 @@ export class Firebase {
           "stringValue": escape.url
         },
         "voting": {
-          "numberValue": -1,
+          "integerValue": -1,
         },
         "offers": {
           "arrayValue": {
