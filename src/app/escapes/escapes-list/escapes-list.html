@@ -1,4 +1,5 @@
-@for (escape of escapeResource.value(); track escape.id; let last = $last) {
+<ddkf-escapes-filter (filter)="filter.set($event)"></ddkf-escapes-filter>
+@for (escape of filteredEscapes(); track escape.id) {
   <mat-card>
     <mat-card-header>
       <h2>{{ escape.title }}</h2>

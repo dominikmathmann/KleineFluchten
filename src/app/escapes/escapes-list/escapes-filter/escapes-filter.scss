@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  gap: 1rem;
+
+  ddkf-type-icon {
+    cursor: pointer;
+
+    &.filtered {
+      color: var(--mat-sys-primary);
+    }
+  }
+}

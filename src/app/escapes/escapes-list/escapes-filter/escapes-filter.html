@@ -1,0 +1,4 @@
+<label>Filter:</label>
+@for(f of filters();track f.key){
+  <ddkf-type-icon [iconType]="f.key" [class.filtered]="f.filter" (click)="toggleFilter(f.key)"></ddkf-type-icon>
+}

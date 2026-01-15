@@ -11,7 +11,7 @@ import {MatIcon} from '@angular/material/icon';
 })
 export class TypeIcon {
 
-  private static readonly MAPPING: { [key: string]: string } = {
+  static readonly MAPPING: { [key: string]: string } = {
     CAMP: 'category',
     HOTEL: 'night_shelter',
     WILD: 'local_parking',
