@@ -1,0 +1,30 @@
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: 1 1 100%;
+  }
+
+  div.upload {
+    padding: 1rem 0;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  mat-radio-button, mat-checkbox {
+    margin: 0 2rem;
+  }
+
+  div > label {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+  }
+}

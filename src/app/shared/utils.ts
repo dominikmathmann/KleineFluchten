@@ -36,9 +36,9 @@ export function googleMapsRouteUrl(startCoords: string, destinationCoords: strin
   return `https://www.google.com/maps/dir/?api=1&origin=${startLat},${startLon}&destination=${destLat},${destLon}`;
 }
 
-export function download(filename:string, text: string) {
+export function download(filename:string, text: string, format = 'text/plain') {
   var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('href', `data:${format};charset=utf-8, ${encodeURIComponent(text)}`);
   element.setAttribute('download', filename);
 
   element.style.display = 'none';

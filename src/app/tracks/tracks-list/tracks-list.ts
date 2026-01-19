@@ -36,6 +36,6 @@ export class TracksList {
   trackResource = this.trackService.trackResource;
 
   download(track: Track){
-    download(`${track.title}.gpx`, track.gpx);
+    download(`${track.title}.gpx`, track.gpx, 'application/gpx+xml');
   }
 }

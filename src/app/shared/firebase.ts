@@ -1,9 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Escape, EscapeAdd, EscapeKey, Track, TrackKey} from './models';
+import {Escape, EscapeAdd, EscapeKey, Track, TrackAdd, TrackKey} from './models';
 import {map} from 'rxjs';
 import {distanceInKm} from './utils';
+import {TracksAdd} from '../tracks/tracks-add/tracks-add';
 
 @Injectable({
   providedIn: 'root',
@@ -73,6 +74,18 @@ export class Firebase {
     )
   }
 
+  createTrack(track: TrackAdd, token: string) {
+    return this.http.post<void>(
+      'https://firestore.googleapis.com/v1/projects/kleinefluchten/databases/(default)/documents/tracks',
+      this.mapTrack(track),
+      {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      }
+    )
+  }
+
 
   updateEscape(field: string, id: string, value: any, valueType: string,  token: string) {
     const requestFieldValue : any = {};
@@ -128,6 +141,36 @@ export class Firebase {
     };
   }
 
+  mapTrack(track: TrackAdd) {
+    return {
+      "fields": {
+        "coordinates": {
+          "stringValue": track.coordinates
+        },
+        "title": {
+          "stringValue": track.title
+        },
+        "notes": {
+          "stringValue": track.notes
+        },
+        "length": {
+          "stringValue": track.length
+        },
+        "url": {
+          "stringValue": track.url
+        },
+        "gpx": {
+          "stringValue": track.gpx
+        },
+        "attributes": {
+          "arrayValue": {
+            "values": track.attributes ? track.attributes.filter(o => o.offered).map(o => ({"stringValue": o.attribute})) : []
+          }
+        }
+      }
+    };
+  }
+
   mapEscapeDocuments(escapeDocuments: any[]): Escape[] {
     return escapeDocuments.map(escapeDocument => {
       const escape = {
@@ -160,6 +203,7 @@ export class Firebase {
 
       const keys: TrackKey[] = [
         'title',
+        'length',
         'url',
         'notes',
         'coordinates',

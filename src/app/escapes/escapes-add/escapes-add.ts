@@ -53,7 +53,7 @@ export class EscapesAdd {
   submit() {
     this.escapesService.saveEscape(this.escape()).subscribe(() => {
       this.escapesService.escapeResource.reload();
-      this.router.navigateByUrl('/list');
+      this.router.navigateByUrl('/list-escapes');
     });
   }
 }

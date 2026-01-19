@@ -12,7 +12,7 @@ import {MatIcon} from '@angular/material/icon';
 export class TypeIcon {
 
   static readonly MAPPING: { [key: string]: string } = {
-    CAMP: 'category',
+    CAMP: 'style',
     HOTEL: 'night_shelter',
     WILD: 'local_parking',
     FOOD: 'restaurant',
@@ -22,7 +22,10 @@ export class TypeIcon {
     WIFI: 'wifi',
     ELECTRICITY: 'bolt',
     SHOP: 'store',
-    STAR: 'star'
+    STAR: 'star',
+    LOOP: 'rotate_right',
+    LAKE: 'pool',
+    RIVER: 'waves',
   }
 
   iconType = input<string>('');

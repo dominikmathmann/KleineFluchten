@@ -6,6 +6,7 @@
       <h2>{{ track.title }}</h2>
     </mat-card-header>
     <span class="full"><img src="gpx.png" height="75px" width="100px" (click)="download(track)"/></span>
+    <span><label>Länge:</label><p>{{ track.length }}</p></span>
     <span><label>Ort:</label><p><a href="{{track.coordinates | coordGoogleMaps}}"
                                    target="new">{{ track.coordinates }}</a></p></span>
     <span><label>Distanz:</label><p><a href="{{track.coordinates | coordGoogleRoute:homeLocationCoordinates}}"

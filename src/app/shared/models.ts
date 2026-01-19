@@ -21,6 +21,7 @@ export interface Track {
   coordinates: string;
   attributes: string[];
   distance: number;
+  length: string;
   gpx: string;
 }
 
@@ -40,7 +41,9 @@ export interface TrackAdd {
   title: string;
   url: string;
   notes: string;
-  attributes: string[];
+  coordinates: string;
+  length: string;
+  attributes: { attribute: string, offered: boolean }[];
   gpx: string;
 }
 
@@ -60,9 +63,9 @@ export enum Offer {
   SHOP = "SHOP",
 }
 
-export enum TrackAttributes {
-  FOOD = "FOOD",
+export enum TrackAttribute {
   LOOP = "LOOP",
+  FOOD = "FOOD",
   LAKE = "LAKE",
   RIVER = "RIVER",
 }

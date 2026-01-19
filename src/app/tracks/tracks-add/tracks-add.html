@@ -1,1 +1,34 @@
-<p>tracks-add works!</p>
+<form (ngSubmit)="submit()">
+  <div class="upload">
+    <input type="file" (change)="handleFileInput($event.target.files)">
+  </div>
+  <mat-form-field>
+    <label>Titel:</label>
+    <input [field]="form.title" matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>Länge:</label>
+    <input [field]="form.length" matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>URL:</label>
+    <input [field]="form.url" matInput/>
+  </mat-form-field>
+  <mat-form-field>
+    <label>Notizen:</label>
+    <textarea [field]="form.notes" matInput></textarea>
+  </mat-form-field>
+  <div>
+    <label>Attribute:</label><br/>
+    @for (o of form.attributes; track o) {
+      <mat-checkbox [field]="o.offered">
+        <ddkf-type-icon [iconType]="o.attribute().value()"/>
+      </mat-checkbox>
+    }
+  </div>
+  <footer>
+    <button mat-raised-button type="submit">speichern</button>
+  </footer>
+</form>
+
+{{track() | json}}
