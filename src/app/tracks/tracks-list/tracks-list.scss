@@ -41,6 +41,16 @@ span {
     overflow: hidden;
   }
 
+  img{
+    cursor: pointer;
+  }
+
+  &.full{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   p.preline {
     white-space: pre-line;
   }

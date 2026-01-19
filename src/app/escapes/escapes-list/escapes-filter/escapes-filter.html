@@ -1,4 +1,7 @@
-<label>Filter:</label>
-@for(f of filters();track f.key){
+<label>Filter</label>
+@for(f of filters();track f.key; let i = $index){
   <ddkf-type-icon [iconType]="f.key" [class.filtered]="f.filter" (click)="toggleFilter(f.key)"></ddkf-type-icon>
+  @if(i != 0 && i != filters().length-1 && filters()[i+1].type!==filters()[i].type ){
+    <div class="break"></div>
+  }
 }

@@ -2,12 +2,14 @@
   <img src="kleine_fluchten_small.jpg" width="100%"/>
 </header>
 @if (userService.idToken()) {
+<div class="nav-container">
   <nav>
     <ol>
-      <li routerLink="list" routerLinkActive="active">list</li>
-      <li routerLink="add" routerLinkActive="active">add</li>
+      <li routerLink="list-escapes" routerLinkActive="active">Escapes</li>
+      <li routerLink="list-tracks" routerLinkActive="active">Tracks</li>
     </ol>
   </nav>
+</div>
 }
 <main>
   <router-outlet></router-outlet>

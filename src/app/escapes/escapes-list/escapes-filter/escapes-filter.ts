@@ -4,7 +4,8 @@ import {TypeIcon} from '../../../shared/type-icon/type-icon';
 
 export interface Filter {
   locationType?: string;
-  offers: string[]
+  offers: string[],
+  minRating: number
 }
 
 @Component({
@@ -27,6 +28,7 @@ export class EscapesFilter {
     {type: 'OFFER', key: 'WIFI', filter: false},
     {type: 'OFFER', key: 'ELECTRICITY', filter: false},
     {type: 'OFFER', key: 'SHOP', filter: false},
+    {type: 'RATING', key: 'STAR', filter: false},
   ])
 
   filter = output<Filter>();
@@ -37,15 +39,18 @@ export class EscapesFilter {
         this.filters()
           .filter(f => f.filter)
           .reduce((filterObject, filter) => {
-            if(filter.type==='LOCATION'){
+            if (filter.type === 'LOCATION') {
               filterObject.locationType = filter.key;
+            } else if (filter.type === 'RATING') {
+              filterObject.minRating = 0;
             } else {
               filterObject.offers.push(filter.key)
             }
             return filterObject;
           }, {
             locationType: undefined,
-            offers: []
+            offers: [],
+            minRating: -1
           } as Filter)
       );
     });

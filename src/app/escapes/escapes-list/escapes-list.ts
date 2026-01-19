@@ -8,6 +8,9 @@ import {EscapesService} from '../../shared/escapes-service';
 import {StarVoting} from '../../shared/star-voting/star-voting';
 import {EscapesFilter, Filter} from './escapes-filter/escapes-filter';
 import {Escape} from '../../shared/models';
+import {MatFabButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'ddkf-escapes-list',
@@ -19,7 +22,10 @@ import {Escape} from '../../shared/models';
     TypeIcon,
     MatCardFooter,
     StarVoting,
-    EscapesFilter
+    EscapesFilter,
+    MatFabButton,
+    MatIcon,
+    RouterLink
   ],
   templateUrl: './escapes-list.html',
   styleUrl: './escapes-list.scss',
@@ -32,18 +38,16 @@ export class EscapesList {
 
   filteredEscapes = computed<Escape[]>(() => {
     let activeFilter = this.filter();
-    const filtered = activeFilter.offers.length || activeFilter.locationType;
+    const filtered = activeFilter.offers.length || activeFilter.locationType || activeFilter.minRating != -1;
     return this.escapeResource.value()?.filter(escape =>
       !filtered ||
-      (!activeFilter.locationType || activeFilter.locationType===escape.locationType) &&
-      (!activeFilter.offers.length || activeFilter.offers.every(offer => escape.offers.includes(offer)))
+      (!activeFilter.locationType || activeFilter.locationType === escape.locationType) &&
+      (!activeFilter.offers.length || activeFilter.offers.every(offer => escape.offers.includes(offer))) &&
+      (escape.voting >= activeFilter.minRating)
     ) || []
   });
 
-  filter = signal<Filter>({locationType: undefined, offers: []})
-
-  constructor() {
-  }
+  filter = signal<Filter>({locationType: undefined, offers: [], minRating: -1})
 
   voteEscape(id: string, voting: number) {
     this.escapesService.vote(id, voting).subscribe(_ => this.escapeResource.reload());

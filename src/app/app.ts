@@ -17,7 +17,7 @@ export class App {
   constructor() {
     effect(() => {
       if( this.userService.idToken()){
-        this.router.navigateByUrl('/list')
+        this.router.navigateByUrl('/list-escapes')
       }
     });
   }

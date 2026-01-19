@@ -1,4 +1,5 @@
 <ddkf-escapes-filter (filter)="filter.set($event)"></ddkf-escapes-filter>
+<button matFab routerLink="/add-escapes">+</button>
 @for (escape of filteredEscapes(); track escape.id) {
   <mat-card>
     <mat-card-header>
@@ -13,7 +14,7 @@
     <span><label>Distanz:</label><p><a href="{{escape.coordinates | coordGoogleRoute:homeLocationCoordinates}}"
                                        target="new">{{ escape.distance }}km</a></p></span>
     <span><label>URL:</label><p><a href="{{escape.url}}" target="new">{{ escape.url }}</a></p></span>
-    <span><label>Notizen:</label><p>{{ escape.notes }}</p></span>
+    <span><label>Notizen:</label><p class="preline">{{ escape.notes }}</p></span>
     <span><label>Typ:</label><p><ddkf-type-icon [iconType]="escape.locationType"></ddkf-type-icon></p></span>
     <span><label>Angebote:</label><p class="multi">
             @for (offer of escape.offers; track offer) {

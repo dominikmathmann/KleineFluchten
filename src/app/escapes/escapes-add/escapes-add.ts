@@ -9,6 +9,7 @@ import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
 import {TypeIcon} from '../../shared/type-icon/type-icon';
 import {MatCheckbox} from '@angular/material/checkbox';
 import {EscapesService} from '../../shared/escapes-service';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'ddkf-escapes-add',
@@ -21,7 +22,8 @@ import {EscapesService} from '../../shared/escapes-service';
     MatRadioButton,
     MatRadioGroup,
     TypeIcon,
-    MatCheckbox
+    MatCheckbox,
+    MatIcon
   ],
   templateUrl: './escapes-add.html',
   styleUrl: './escapes-add.scss',

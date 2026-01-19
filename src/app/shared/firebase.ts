@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Escape, EscapeAdd, EscapeKey} from './models';
+import {Escape, EscapeAdd, EscapeKey, Track, TrackKey} from './models';
 import {map} from 'rxjs';
 import {distanceInKm} from './utils';
 
@@ -45,6 +45,19 @@ export class Firebase {
       }
     ).pipe(
       map(escapes => this.mapEscapeDocuments(escapes.documents))
+    );
+  }
+
+  loadTracks(token: string) {
+    return this.http.get<any>(
+      'https://firestore.googleapis.com/v1/projects/kleinefluchten/databases/(default)/documents/tracks',
+      {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      }
+    ).pipe(
+      map(escapes => this.mapTrackDocuments(escapes.documents))
     );
   }
 
@@ -136,6 +149,28 @@ export class Firebase {
       escape.offers = escape.offers?.values ? (escape.offers.values as unknown as any[]).map(key => this.extract(key)) : [];
       escape.distance = distanceInKm(environment.home, escape.coordinates);
       return escape;
+    }).sort((a, b) => a.distance - b.distance);
+  }
+
+  mapTrackDocuments(trackDocuments: any[]): Track[] {
+    return trackDocuments.map(trackDocument => {
+      const track = {
+        id: trackDocument.name
+      } as Track;
+
+      const keys: TrackKey[] = [
+        'title',
+        'url',
+        'notes',
+        'coordinates',
+        'gpx',
+        'attributes'
+      ];
+      // @ts-ignore
+      keys.forEach(field => track[field] = this.extract(trackDocument.fields[field]) as any);
+      track.attributes = track.attributes?.values ? (track.attributes.values as unknown as any[]).map(key => this.extract(key)) : [];
+      track.distance = distanceInKm(environment.home, track.coordinates);
+      return track;
     }).sort((a, b) => a.distance - b.distance);
   }
 

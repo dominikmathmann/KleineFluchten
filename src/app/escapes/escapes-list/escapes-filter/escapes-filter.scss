@@ -1,5 +1,10 @@
 :host {
+  border-bottom: 1px solid var(--mat-sys-secondary);
+  padding-bottom: 1rem;
+
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
 
   ddkf-type-icon {
@@ -8,5 +13,10 @@
     &.filtered {
       color: var(--mat-sys-primary);
     }
+  }
+
+  .break, label{
+    text-align: center;
+    flex: 1 1 100%;
   }
 }

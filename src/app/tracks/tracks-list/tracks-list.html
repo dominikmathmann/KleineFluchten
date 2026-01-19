@@ -1,0 +1,25 @@
+<!--<ddkf-escapes-filter (filter)="filter.set($event)"></ddkf-escapes-filter>-->
+<button matFab routerLink="/add-tracks">+</button>
+@for (track of trackResource.value(); track track.id) {
+  <mat-card>
+    <mat-card-header>
+      <h2>{{ track.title }}</h2>
+    </mat-card-header>
+    <span class="full"><img src="gpx.png" height="75px" width="100px" (click)="download(track)"/></span>
+    <span><label>Ort:</label><p><a href="{{track.coordinates | coordGoogleMaps}}"
+                                   target="new">{{ track.coordinates }}</a></p></span>
+    <span><label>Distanz:</label><p><a href="{{track.coordinates | coordGoogleRoute:homeLocationCoordinates}}"
+                                       target="new">{{ track.distance }}km</a></p></span>
+    <span><label>URL:</label><p><a href="{{track.url}}" target="new">{{ track.url }}</a></p></span>
+    <span><label>Notizen:</label><p class="preline">{{ track.notes }}</p></span>
+    <span><label>Angebote:</label><p class="multi">
+            @for (attr of track.attributes; track attr) {
+              <p><ddkf-type-icon [iconType]="attr"></ddkf-type-icon></p>
+            }
+    </p>
+    </span>
+    <mat-card-footer>
+      <img src="tracks_divider_ss.jpg" width="250px">
+    </mat-card-footer>
+  </mat-card>
+}

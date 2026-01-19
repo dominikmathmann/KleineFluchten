@@ -21,7 +21,8 @@ export class TypeIcon {
     SWIMMING: 'pool',
     WIFI: 'wifi',
     ELECTRICITY: 'bolt',
-    SHOP: 'store'
+    SHOP: 'store',
+    STAR: 'star'
   }
 
   iconType = input<string>('');
