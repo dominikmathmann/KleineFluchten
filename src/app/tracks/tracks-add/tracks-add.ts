@@ -1,6 +1,6 @@
 import {Component, inject, signal} from '@angular/core';
 import {Field, form, required} from '@angular/forms/signals';
-import {Offer, TrackAdd, TrackAttribute} from '../../shared/models';
+import {TrackAdd, TrackAttribute} from '../../shared/models';
 import {FormsModule} from '@angular/forms';
 import {MatFormField, MatInput} from '@angular/material/input';
 import {MatCheckbox} from '@angular/material/checkbox';
@@ -31,7 +31,14 @@ export class TracksAdd {
   router = inject(Router);
 
   track = signal<TrackAdd>({
-    length: '', coordinates: '', gpx: '', notes: '', title: '', url: '',  attributes: Object.values(TrackAttribute).map(attribute => ({attribute, offered: false}))
+    image: '',
+    length: '',
+    coordinates: '',
+    gpx: '',
+    notes: '',
+    title: '',
+    url: '',
+    attributes: Object.values(TrackAttribute).map(attribute => ({attribute, offered: false}))
   })
   form = form(this.track, (schema) => {
     required(schema.title);
@@ -47,14 +54,14 @@ export class TracksAdd {
 
   handleFileInput(files: any) {
     const file: File = files[0];
-     file.text().then(c => {
-       const lats = /trkpt lat="(.*?)" lon="(.*?)"/g.exec(c)
+    file.text().then(c => {
+      const lats = /trkpt lat="(.*?)" lon="(.*?)"/g.exec(c)
 
-       this.track.update(t => {
-         t.coordinates = `${lats?.[1]},${lats?.[2]}`
-         t.gpx = c;
-         return t;
-       })
-     })
+      this.track.update(t => {
+        t.coordinates = `${lats?.[1]},${lats?.[2]}`
+        t.gpx = c.trim();
+        return t;
+      })
+    })
   }
 }

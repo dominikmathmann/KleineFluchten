@@ -38,7 +38,7 @@ export function googleMapsRouteUrl(startCoords: string, destinationCoords: strin
 
 export function download(filename:string, text: string, format = 'text/plain') {
   var element = document.createElement('a');
-  element.setAttribute('href', `data:${format};charset=utf-8, ${encodeURIComponent(text)}`);
+  element.setAttribute('href', `data:${format};charset=utf-8,${encodeURIComponent(text).trim()}`);
   element.setAttribute('download', filename);
 
   element.style.display = 'none';

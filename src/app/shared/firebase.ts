@@ -159,6 +159,9 @@ export class Firebase {
         "url": {
           "stringValue": track.url
         },
+        "image": {
+          "stringValue": track.image
+        },
         "gpx": {
           "stringValue": track.gpx
         },
@@ -208,6 +211,7 @@ export class Firebase {
         'notes',
         'coordinates',
         'gpx',
+        'image',
         'attributes'
       ];
       // @ts-ignore

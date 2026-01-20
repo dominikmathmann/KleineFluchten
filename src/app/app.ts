@@ -16,7 +16,7 @@ export class App {
 
   constructor() {
     effect(() => {
-      if( this.userService.idToken()){
+      if(this.userService.idToken() && ['/', '/login'].includes(this.router.url)){
         this.router.navigateByUrl('/list-escapes')
       }
     });

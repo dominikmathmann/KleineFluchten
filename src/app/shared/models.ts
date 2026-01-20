@@ -23,6 +23,7 @@ export interface Track {
   distance: number;
   length: string;
   gpx: string;
+  image: string;
 }
 
 export type TrackKey = keyof Track;
@@ -45,6 +46,7 @@ export interface TrackAdd {
   length: string;
   attributes: { attribute: string, offered: boolean }[];
   gpx: string;
+  image: string;
 }
 
 export enum LocationType {
