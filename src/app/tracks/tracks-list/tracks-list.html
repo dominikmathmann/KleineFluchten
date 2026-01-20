@@ -3,10 +3,10 @@
 @for (track of trackResource.value(); track track.id) {
   <mat-card>
     <mat-card-header>
-      <h2>{{ track.title }}</h2>
+      <h2 [routerLink]="['/full/track-view', track.id]">{{ track.title }}</h2>
     </mat-card-header>
     @if (track.image) {
-      <span class="img"><img [src]="track.image"/></span>
+      <span class="img" [routerLink]="['/full/track-view', track.id]"><img [src]="track.image"/></span>
     }
     <span class="full"><img src="gpx.png" height="75px" width="100px" (click)="download(track)"/></span>
     <span><label>Länge:</label><p>{{ track.length }}</p></span>

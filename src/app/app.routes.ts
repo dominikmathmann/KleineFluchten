@@ -4,6 +4,7 @@ import {EscapesAdd} from './escapes/escapes-add/escapes-add';
 import {Login} from './login/login/login';
 import {TracksList} from './tracks/tracks-list/tracks-list';
 import {TracksAdd} from './tracks/tracks-add/tracks-add';
+import {TrackView} from './tracks/track-view/track-view';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -11,5 +12,6 @@ export const routes: Routes = [
   {path: 'add-escapes', component: EscapesAdd},
   {path: 'list-tracks', component: TracksList},
   {path: 'add-tracks', component: TracksAdd},
+  {path: 'full/track-view/:id', component: TrackView},
   {path: 'login', component: Login},
 ];

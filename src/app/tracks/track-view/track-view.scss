@@ -1,0 +1,21 @@
+:host{
+  --mat-fab-container-color:  var(--mat-sys-surface);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  button, button:active, button:hover, button:focus{
+    font-size: 50px;
+    box-shadow: none;
+
+    align-self: flex-start;
+  }
+
+  #map{
+    width: 90vw;
+    height: 90vh;
+  }
+}
+
