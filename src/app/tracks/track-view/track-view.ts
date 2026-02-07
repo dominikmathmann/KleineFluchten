@@ -1,11 +1,10 @@
 import {Component, computed, effect, inject, input} from '@angular/core';
 import {TracksService} from '../../shared/tracks-service';
-import { Map, TileLayer} from 'leaflet';
+import {Map, TileLayer} from 'leaflet';
 // @ts-ignore
-import { GPX } from 'leaflet-gpx';
+import {GPX} from 'leaflet-gpx';
 import {Track} from '../../shared/models';
 import {MatFabButton} from '@angular/material/button';
-import {RouterLink} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {Location} from '@angular/common';
 
@@ -13,7 +12,6 @@ import {Location} from '@angular/common';
   selector: 'ddkf-track-view',
   imports: [
     MatFabButton,
-    RouterLink,
     MatIcon
   ],
   templateUrl: './track-view.html',
@@ -38,11 +36,14 @@ export class TrackView {
 
       // URL to your GPX file or the GPX itself as a XML string.
       const options = {
-        async: false,
-        polyline_options: { color: 'red' },
+        async: true,
+        polyline_options: {color: 'green'},
+        marker_options: {
+          shadowSize: [0, 0],
+        }
       };
 
-      new GPX(this.track().gpx, options).on('loaded', (e:any) => {
+      new GPX(this.track().gpx, options).on('loaded', (e: any) => {
         map.fitBounds(e.target.getBounds());
       }).addTo(map);
     });
