@@ -6,9 +6,9 @@ import {MatFormField, MatInput} from '@angular/material/input';
 import {MatCheckbox} from '@angular/material/checkbox';
 import {TypeIcon} from '../../shared/type-icon/type-icon';
 import {MatButton} from '@angular/material/button';
-import {JsonPipe} from '@angular/common';
 import {TracksService} from '../../shared/tracks-service';
 import {Router} from '@angular/router';
+import {parseGPXAndCalculateDistance} from '../../shared/utils';
 
 @Component({
   selector: 'ddkf-tracks-add',
@@ -19,8 +19,7 @@ import {Router} from '@angular/router';
     Field,
     MatCheckbox,
     TypeIcon,
-    MatButton,
-    JsonPipe
+    MatButton
   ],
   templateUrl: './tracks-add.html',
   styleUrl: './tracks-add.scss',
@@ -60,7 +59,8 @@ export class TracksAdd {
       this.track.update(t => {
         t.coordinates = `${lats?.[1]},${lats?.[2]}`
         t.gpx = c.trim();
-        return t;
+        t.length = parseGPXAndCalculateDistance(c) + 'km';
+        return {...t};
       })
     })
   }

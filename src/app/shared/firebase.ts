@@ -3,8 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Escape, EscapeAdd, EscapeKey, Track, TrackAdd, TrackKey} from './models';
 import {map} from 'rxjs';
-import {distanceInKm} from './utils';
-import {TracksAdd} from '../tracks/tracks-add/tracks-add';
+import {distanceInKMFromCoordinateString} from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -87,11 +86,11 @@ export class Firebase {
   }
 
 
-  updateEscape(field: string, id: string, value: any, valueType: string,  token: string) {
-    const requestFieldValue : any = {};
+  updateEscape(field: string, id: string, value: any, valueType: string, token: string) {
+    const requestFieldValue: any = {};
     requestFieldValue[valueType] = value;
 
-    const request:any = {
+    const request: any = {
       fields: {}
     }
     request.fields[field] = requestFieldValue;
@@ -193,7 +192,7 @@ export class Firebase {
       // @ts-ignore
       keys.forEach(field => escape[field] = this.extract(escapeDocument.fields[field]) as any);
       escape.offers = escape.offers?.values ? (escape.offers.values as unknown as any[]).map(key => this.extract(key)) : [];
-      escape.distance = distanceInKm(environment.home, escape.coordinates);
+      escape.distance = distanceInKMFromCoordinateString(environment.home, escape.coordinates);
       return escape;
     }).sort((a, b) => a.distance - b.distance);
   }
@@ -217,7 +216,7 @@ export class Firebase {
       // @ts-ignore
       keys.forEach(field => track[field] = this.extract(trackDocument.fields[field]) as any);
       track.attributes = track.attributes?.values ? (track.attributes.values as unknown as any[]).map(key => this.extract(key)) : [];
-      track.distance = distanceInKm(environment.home, track.coordinates);
+      track.distance = distanceInKMFromCoordinateString(environment.home, track.coordinates);
       return track;
     }).sort((a, b) => a.distance - b.distance);
   }
